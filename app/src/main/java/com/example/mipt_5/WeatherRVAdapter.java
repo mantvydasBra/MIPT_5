@@ -1,6 +1,7 @@
 package com.example.mipt_5;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +29,16 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
         this.weatherRVModelArrayList = weatherRVModelArrayList;
     }
 
+    // Populating recycler view with little cards (horizontally)
     @NonNull
     @Override
     public WeatherRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.weather_rv_item, parent, false);
+        Log.d("[ INFLATER ]", "Inflated view with little cards");
         return new ViewHolder(view);
     }
 
+    // Populating little cards with data
     @Override
     public void onBindViewHolder(@NonNull WeatherRVAdapter.ViewHolder holder, int position) {
 
@@ -47,6 +51,7 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
         try {
             Date t = input.parse(model.getTime());
             holder.tvTime.setText(output.format(Objects.requireNonNull(t)));
+            Log.d("[ onBindViewHolder ]", "Date, wind, temperature set and images loaded");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -57,6 +62,7 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
         return weatherRVModelArrayList.size();
     }
 
+    // Getting little card's variables
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvWind;
         private final TextView tvTemperature;
