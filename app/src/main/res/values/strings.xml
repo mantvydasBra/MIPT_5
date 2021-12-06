@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MIPT_5</string>
+    <string name="bckDesc">Dark Background</string>
+    <string name="city_name">City Name</string>
+    <string name="text_input_hint">Enter City Name</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="temp_degrees">23</string>
+    <string name="weather_condition_icon">Weather Condition Icon</string>
+    <string name="condition">Condition</string>
+    <string name="tvWeatherText">Today\'s Weather Forecast</string>
+    <string name="Celsius">°C</string>
+    <string name="kilometersPerHour">Km/h</string>
+    <string name="time">Time</string>
+    <string name="weather_condition_every_hour">Weather condition every hour</string>
+    <string name="temp_wind_speed">13</string>
 </resources>

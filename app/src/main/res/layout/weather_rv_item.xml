@@ -20,7 +20,7 @@
             android:id="@+id/tvTime"
             android:gravity="center"
             android:padding="4dp"
-            android:text="Time"
+            android:text="@string/time"
             android:textColor="@color/white"
             android:textAlignment="center" />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvTemperature"
             android:gravity="center"
-            android:text="20"
+            android:text="@string/temp_degrees"
             android:textAlignment="center"
             android:textSize="20sp"
             android:layout_below="@+id/tvTime"
@@ -41,6 +41,7 @@
             android:layout_below="@+id/tvTemperature"
             android:id="@+id/ivCondition"
             android:layout_centerHorizontal="true"
+            android:contentDescription="@string/weather_condition_every_hour"
             android:layout_margin="5dp"
             android:padding="4dp"
             android:src="@mipmap/ic_launcher" />
@@ -54,7 +55,7 @@
             android:layout_below="@+id/ivCondition"
             android:id="@+id/tvWindSpeed"
             android:textColor="@color/white"
-            android:text="13"
+            android:text="@string/temp_wind_speed"
             android:padding="3dp"
             android:layout_margin="4dp" />
     </RelativeLayout>

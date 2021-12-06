@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.ViewHolder> {
 
@@ -38,14 +39,14 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
     public void onBindViewHolder(@NonNull WeatherRVAdapter.ViewHolder holder, int position) {
 
         WeatherRVModel model = weatherRVModelArrayList.get(position);
-        holder.tvTemperature.setText(model.getTemperature()+"°C");
+        holder.tvTemperature.setText(String.format("%s%s", model.getTemperature(), context.getString(R.string.Celsius)));
         Picasso.get().load("http:".concat(model.getIcon())).into(holder.ivCondition);
-        holder.tvWind.setText(model.getWindSpeed()+"Km/h");
+        holder.tvWind.setText(String.format("%s%s", model.getWindSpeed(), context.getString(R.string.kilometersPerHour)));
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         SimpleDateFormat output = new SimpleDateFormat("hh:mm aa");
         try {
             Date t = input.parse(model.getTime());
-            holder.tvTime.setText(output.format(t));
+            holder.tvTime.setText(output.format(Objects.requireNonNull(t)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -56,9 +57,11 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
         return weatherRVModelArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvWind, tvTemperature, tvTime;
-        private ImageView ivCondition;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvWind;
+        private final TextView tvTemperature;
+        private final TextView tvTime;
+        private final ImageView ivCondition;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

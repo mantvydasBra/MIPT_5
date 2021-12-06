@@ -25,25 +25,29 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@color/black_shade_1"
+            android:contentDescription="@string/bckDesc"
             android:id="@+id/ivBlack"/>
 
         <TextView
             android:id="@+id/tvCityName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="City Name"
+            android:text="@string/city_name"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_marginTop="30dp"
             android:padding="20dp"
-            android:textSize="18sp"/>
+            android:textSize="23sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/llEdt"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
             android:layout_below="@+id/tvCityName"
             android:weightSum="5">
 
@@ -54,7 +58,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="4.5"
                 android:background="@android:color/transparent"
-                android:hint="Enter City Name"
+                android:hint="@string/text_input_hint"
                 android:padding="5dp"
                 app:hintTextColor="@color/white"
                 android:textColorHint="@color/white">
@@ -77,6 +81,7 @@
                 android:layout_weight="0.5"
                 android:id="@+id/ivSearch"
                 android:layout_margin="10dp"
+                android:contentDescription="@string/search_icon"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_search"
@@ -90,14 +95,15 @@
             android:layout_below="@+id/llEdt"
             android:gravity="center_horizontal"
             android:padding="5dp"
-            android:text="23"
+            android:text="@string/temp_degrees"
             android:textColor="@color/white"
-            android:textSize="70dp" />
+            android:textSize="70sp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/ivIcon"
+            android:contentDescription="@string/weather_condition_icon"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tvTemperature"
             android:layout_margin="10dp"
@@ -110,7 +116,8 @@
             android:layout_margin="10dp"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="Condition"
+            android:text="@string/condition"
+            android:textSize="21sp"
             android:textColor="@color/white"
             android:layout_below="@+id/ivIcon"/>
 
@@ -119,7 +126,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_marginBottom="10dp"
-            android:text="Today's Weather Forecast"
+            android:text="@string/tvWeatherText"
+            android:textSize="21sp"
             android:textColor="@color/white"
             android:layout_above="@+id/rvWeather"
             android:textStyle="bold" />
@@ -130,7 +138,8 @@
             android:id="@+id/rvWeather"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginBottom="80dp"/>
 
     </RelativeLayout>
 
