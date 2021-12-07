@@ -3,7 +3,8 @@
 Simple app that shows weather using weatherAPI.
 
 # Video
-https://drive.google.com/file/d/1i6NgNi0hjlJyC7_I-3tExbPb6wYuG2Ro/view?usp=sharing
+
+https://user-images.githubusercontent.com/22366310/145026058-451bcf30-f4bc-49a2-a504-2805aabbeac9.mp4
 
 # Bugs
 
