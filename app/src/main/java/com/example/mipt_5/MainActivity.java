@@ -16,6 +16,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -115,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         cityName = "Vilnius";
         getWeatherInfo(cityName);
 
+        tiEditCityName.setOnClickListener(view -> tiEditCityName.setCursorVisible(true));
+
         // Check for input when clicking search icon
         ivSearch.setOnClickListener(view -> {
             String city = Objects.requireNonNull(tiEditCityName.getText()).toString();
@@ -131,8 +134,11 @@ public class MainActivity extends AppCompatActivity {
         // If clicked on textInput and want to make keyboard disappear - press anywhere else on screen
         rlHome.setOnTouchListener((v, event) -> {
             Log.d("[ TouchListener ]", "Clicked on screen");
-            InputMethodManager imm = (InputMethodManager) MainActivity.this.getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), 0);
+            hideKeyboard();
+            // Checking if there is nothing entered and move hint downwards if so
+            if (tiEditCityName.getText() == null || TextUtils.isEmpty(tiEditCityName.getText().toString())) {
+                tilCityName.clearFocus();
+            }
             return true;
         });
 
@@ -182,6 +188,16 @@ public class MainActivity extends AppCompatActivity {
         return cityName;
     }
 
+    // Helper to hide keyboard
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) MainActivity.this.getSystemService(INPUT_METHOD_SERVICE);
+        if (MainActivity.this.getCurrentFocus() != null) {
+            Log.d("[ hideKeyboard ]", "Hiding keyboard");
+            imm.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), 0);;
+        }
+
+    }
+
     // Main function which gets data from API
     // Didn't have to use ASYNC, because Volley is async it self
     // Every Volley request which takes a listener for example, success and fail listeners, is asynchronous and by default I want to say that almost all are asynchronous.
@@ -191,6 +207,9 @@ public class MainActivity extends AppCompatActivity {
     // https://www.volleyapp.com/#:~:text=Volley%20is%20asynchronous%20which%20means,without%20having%20to%20coordinate%20schedules
     @SuppressWarnings("SpellCheckingInspection")
     private void getWeatherInfo(String cityName) {
+        tilCityName.clearFocus();
+        hideKeyboard();
+//        tiEditCityName.setCursorVisible(false);
         tiEditCityName.setText("");
         // Building long string (cityName can change with user input)
         String url = "http://api.weatherapi.com/v1/forecast.json?key=28be60798e28475387a121902210512&q="
@@ -224,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                     tvTemperature.setTextColor(ContextCompat.getColor(this, R.color.black_shade_1));
                     tiEditCityName.setTextColor(ContextCompat.getColor(this, R.color.black_shade_1));
                     tvCityName.setTextColor(ContextCompat.getColor(this, R.color.black_shade_1));
-                    tilCityName.setHintTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black_shade_1)));
+                    tilCityName.setDefaultHintTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black_shade_1)));
                     Picasso.get().load("https://images.unsplash.com/photo-1512508497406-d4c5505afbca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80").into(ivBlack);
                 }
                 else {
@@ -232,8 +251,8 @@ public class MainActivity extends AppCompatActivity {
                     // Setting some text to white so it is more visable
                     tvTemperature.setTextColor(ContextCompat.getColor(this, R.color.white));
                     tiEditCityName.setTextColor(ContextCompat.getColor(this, R.color.white));
-                    tiEditCityName.setHintTextColor(ContextCompat.getColor(this, R.color.white));
-                    tilCityName.setHintTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
+                    tvCityName.setTextColor(ContextCompat.getColor(this, R.color.white));
+                    tilCityName.setDefaultHintTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
                     Picasso.get().load("https://images.unsplash.com/photo-1505322022379-7c3353ee6291?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmlnaHR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60").into(ivBlack);
                 }
 
